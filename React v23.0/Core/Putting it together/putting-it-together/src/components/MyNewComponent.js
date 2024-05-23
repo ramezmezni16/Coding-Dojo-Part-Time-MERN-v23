@@ -1,4 +1,3 @@
-// components/MyNewComponent.js
 import React, { Component } from 'react';
 
 class PersonComponent extends Component {
@@ -8,11 +7,9 @@ class PersonComponent extends Component {
             age: props.age
         };
     }
-
     birthdayButton = () => {
         this.setState(prevState => ({ age: prevState.age + 1 }));
     };
-
     render() {
         return (
             <div className="person-card">
@@ -24,5 +21,4 @@ class PersonComponent extends Component {
         );
     }
 }
-
 export default PersonComponent;

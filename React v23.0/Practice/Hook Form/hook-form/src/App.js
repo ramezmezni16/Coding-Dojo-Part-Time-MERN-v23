@@ -7,10 +7,7 @@ const UserForm = (props) => {
     const [password, setPassword] = useState("");  
     
     const createUser = (e) => {
-        // we must prevent the default refresh of the browser to keep our state from being reset
         e.preventDefault();
-        
-        // shorthand ES6 syntax for building an object - see notes above
         const newUser = { name, email, password };
         console.log("Welcome", newUser);
     	setName("");

@@ -1,17 +1,19 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import './App.css';
-import { useState } from 'react';
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
+
   const fetchPokemon = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=807")
-      .then(response => response.json())
-      .then(data => {
-        const names = data.results.map(pokemon => pokemon.name);
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=807")
+      .then(response => {
+        const names = response.data.results.map(pokemon => pokemon.name);
         setPokemonList(names);
       })
       .catch(err => console.log(err));
   };
+
   return (
     <div className="App">
       <button onClick={fetchPokemon}>Fetch Pokemon</button>

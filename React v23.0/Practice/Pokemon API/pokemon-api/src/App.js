@@ -4,7 +4,7 @@ import { useState } from 'react';
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const fetchPokemon = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=807")
       .then(response => response.json())
       .then(data => {
         const names = data.results.map(pokemon => pokemon.name);

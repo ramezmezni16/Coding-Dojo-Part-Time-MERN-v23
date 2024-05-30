@@ -65,4 +65,8 @@ const TodoList = () => {
 
 
 
+<<<<<<< HEAD
 export default TodoList;
+=======
+export default TodoList;
+>>>>>>> 1b25d6ffe10ca9f5e8138c8c2e47121f2259ddb7

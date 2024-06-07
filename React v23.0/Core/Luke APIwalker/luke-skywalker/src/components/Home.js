@@ -20,9 +20,6 @@ const Home = () => {
         <select id="resource-select" value={resource} onChange={(e) => setResource(e.target.value)}>
           <option value="people">People</option>
           <option value="planets">Planets</option>
-          <option value="starships">Starships</option>
-          <option value="vehicles">Vehicles</option>
-          <option value="species">Species</option>
         </select>
         <label htmlFor="id-input">ID:</label>
         <input

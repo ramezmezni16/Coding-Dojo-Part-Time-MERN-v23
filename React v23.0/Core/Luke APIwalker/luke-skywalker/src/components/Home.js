@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Star Wars API Search</h1>
+      <h1>I'm a Star Wars enthusiast 😖👉👈</h1>
       <div id="search-container">
         <label htmlFor="resource-select">Search for:</label>
         <select id="resource-select" value={resource} onChange={(e) => setResource(e.target.value)}>

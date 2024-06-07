@@ -49,4 +49,8 @@ const Character = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Character;
+=======
+export default Character;
+>>>>>>> e8aa3e6e8700916598204967981fabdda3fa3d4e

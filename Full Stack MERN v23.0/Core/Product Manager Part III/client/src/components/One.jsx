@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 
 function One() {
@@ -10,7 +10,7 @@ function One() {
     const [c,setC] = useState({})
 
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/products/"+id)
+        axios.get("http://localhost:8000/api/product/"+id)
             .then(res=>setC(res.data))
             .catch(err=>console.error(err))
     },[id])
@@ -27,6 +27,7 @@ function One() {
                 <div className='card-body'>
                     <h3>{c.price}</h3>
                     <h3>{c.description}</h3>
+                    <Link to={"/" + id + "/edit"}>Edit</Link>
                 </div>
             </div>
         </div>

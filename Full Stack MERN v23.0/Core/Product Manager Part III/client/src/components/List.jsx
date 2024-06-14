@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Link from 'react';
+import { Link } from 'react-router-dom';
 
 
-function List() {
+const List = (props) => {
 
 
 
@@ -14,6 +14,16 @@ function List() {
             .then(res => setProducts(res.data))
             .catch(err => console.error(err))
     },[])
+
+    const { removeFromDom } = props;
+
+    const deleteProduct = (id) => {
+        axios.delete('http://localhost:8000/api/products/' + id)
+            .then(res => {
+                removeFromDom(id)
+            })
+            .catch(err => console.error(err));
+    }
 
     return (
         <div className='container mt-5'>
@@ -34,6 +44,9 @@ function List() {
                                 </td>
                             <td>{c.price}</td>
                             <td>{c.description}</td>
+                            <td>
+                                <button onClick={(e)=>{deleteProduct(c._id)}}>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

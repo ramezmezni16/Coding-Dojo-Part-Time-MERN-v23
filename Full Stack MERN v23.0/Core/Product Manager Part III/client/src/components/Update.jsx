@@ -19,7 +19,7 @@ const Update = (props) => {
     
     const updateProduct = e => {
         e.preventDefault();
-        axios.patch('http://localhost:8000/api/products/' + id, {
+        axios.put('http://localhost:8000/api/products/' + id, {
             title,
             price,
             description

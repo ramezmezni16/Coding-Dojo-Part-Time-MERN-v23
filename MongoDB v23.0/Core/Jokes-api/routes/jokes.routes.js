@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const {getAllJokes, getJokeById, createJoke, updateJoke, deleteJoke} = require('../controllers/jokes.controller');
 
-router.get('/jokes', getAllJokes);
-router.get('/jokes/:id', getJokeById);
-router.post('/jokes', createJoke);
-router.patch('/jokes/:id', updateJoke);
-router.delete('/jokes/:id', deleteJoke);
+router.get('/api/jokes', getAllJokes);
+router.get('/api/jokes/:id', getJokeById);
+router.post('/api/jokes', createJoke);
+router.patch('/api/jokes/:id', updateJoke);
+router.delete('/api/jokes/:id', deleteJoke);
 
 module.exports = router;

@@ -3,8 +3,8 @@ const Joke = require('../models/jokes.model');
 const getAllJokes = (req, res) => {
     Joke.find()
         .then(jokes => res.json(jokes))
-        .catch(err => res.status(400).json({ error: err }));
-};
+        .catch(err=> res.json(err))
+}
 
 const getJokeById = (req, res) => {
     Joke.findById(req.params.id)

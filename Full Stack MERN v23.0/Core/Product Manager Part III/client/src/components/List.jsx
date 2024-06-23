@@ -1,59 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import {Link, useNavigate} from 'react-router-dom'
 
+function List(props) {
 
-const List = (props) => {
+    const nav = useNavigate()
 
-
+const {displayUp} = props
 
     const [products, setProducts] = useState([])
 
-    useEffect( ()=> {
+    useEffect(()=>{
         axios.get("http://localhost:8000/api/products")
-            .then(res => setProducts(res.data))
-            .catch(err => console.error(err))
-    },[])
+            .then(res =>setProducts(res.data))
+            .catch(err=>console.error(err))
+    },[displayUp])
 
-    const { removeFromDom } = props;
-
-    const deleteProduct = (id) => {
-        axios.delete('http://localhost:8000/api/products/' + id)
-            .then(res => {
-                removeFromDom(id)
-            })
-            .catch(err => console.error(err));
+    const deleteP = (id) => {
+        axios.delete("http://localhost:8000/api/products/"+ id)
+            .then(res=> setProducts(products.filter((p,i)=> p._id !== id)))
+            .catch(err=>console.error(err))
     }
+    
 
-    return (
-        <div className='container mt-5'>
-            <h1>Products List</h1>
-            <table className='table table-sm table-bordred'>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(c => (
-                        <tr key={c._id}>
-                            <td>
-                                <Link to={`/c/${c._id}`}>{c.title}</Link> 
-                                </td>
-                            <td>{c.price}</td>
-                            <td>{c.description}</td>
-                            <td>
-                                <button onClick={(e)=>{deleteProduct(c._id)}}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    )
-};
+  return (
+    <div>
+        {products.map((p,i)=>(
+            <div>
+                <h4><Link to={"/products/"+p._id}>{p.title}</Link></h4>
+                <button onClick={()=>nav("/edit/"+p._id)}>Edit</button>
+                <button onClick={()=>deleteP(p._id)}>Delete</button>
+            </div>
+        ))}
+    </div>
+  )
+}
 
-
-export default List;
+export default List

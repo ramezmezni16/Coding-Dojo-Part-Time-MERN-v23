@@ -1,19 +1,22 @@
-import React from 'react';
-import {Routes, Route} from 'react-router-dom';
+import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Create from './components/Create';
 import List from './components/List';
-import ProductForm from './components/ProductForm';
 import One from './components/One';
-import Update from './components/Update';
+import Edit from './components/Edit'
 
 function App() {
+  const [displayUp, setDisplayUp] = useState({}) 
   return (
     <div className="App">
-      <Routes>
-        <Route path='/' element= {<ProductForm/>} />
-        <Route path='/List' element= {<List/>} />
-        <Route path='/One' element= {<One/>} />
-        <Route path='/:id/edit' element={<Update/>} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path='/products' element={<> <Create setDisplayUp={setDisplayUp}/> <List displayUp={displayUp}/> </> }/>
+          <Route path='/products/:id' element={<One/>} />
+          <Route path='/edit/:id' element={<Edit/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }

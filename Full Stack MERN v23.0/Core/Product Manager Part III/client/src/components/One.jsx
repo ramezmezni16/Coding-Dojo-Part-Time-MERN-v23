@@ -1,42 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function One() {
-
-    const {id} =useParams()
     const nav = useNavigate()
-    const [c,setC] = useState({})
+    const {id} = useParams()
+    const [product, setProduct] = useState({})
 
-    useEffect(()=>{
-        axios.get("http://localhost:8000/api/product/"+id)
-            .then(res=>setC(res.data))
+    useEffect(()=>(
+        axios.get("http://localhost:8000/api/products/"+ id)
+            .then(res=>setProduct.data)
             .catch(err=>console.error(err))
-    },[id])
+    ),[id])
 
-
-
-
-
-
-    return(
-        <div className='container mt-5'>
-            <div className='card'>
-                <h1>{c.title}</h1>
-                <div className='card-body'>
-                    <h3>{c.price}</h3>
-                    <h3>{c.description}</h3>
-                    <Link to={"/" + id + "/edit"}>Edit</Link>
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <div>
+        <h1>{product.title}</h1>
+        <p>Price: ${product.price}</p>
+        <p>Description: {product.description}</p>
+        <button onClick={()=>nav("/products")}>Home</button>
+    </div>
+  )
 }
 
-
-
-
-
-
-export default One;
+export default One

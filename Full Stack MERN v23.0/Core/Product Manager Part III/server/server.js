@@ -4,6 +4,9 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT;
     
-app.use(cors())
-require('./routes/products.routes')(app);
+app.use(express.json(), express.urlencoded({extended:true }), cors());
+
+require('./config/mongoose.config')
+require('./routes/product.routes')(app);
+
 app.listen(port, () => console.log(`Listening on port: ${port}`) );

@@ -1,26 +1,36 @@
-const { Product } = require('../models/product.model');
+const Product = require("../models/product.model")
+
+module.exports = {
+    getAll: (req,res) => {
+        Product.find()
+            .then(object=> res.json(object))
+            .catch(err=> res.json(err))
+    },
 
 
-module.exports.createProduct = (request, response) => {
-    const { title, price, description } = request.body;
-    Product.create({
-        title,
-        price,
-        description
-    })
-        .then(Product => response.json(Product))
-        .catch(err => response.json(err));
+    getOne: (req,res) => {
+        Product.findOne({_id: req.params.id})
+            .then(object=> res.json(object))
+            .catch(err=> res.json(err))
+    },
+
+
+    create: (req,res) => {
+        Product.create(req.body)
+            .then(object=> res.json(object))
+            .catch(err=> res.status(400).json(err))
+    },
+
+
+    update: (req,res) => {
+        Product.findByIdAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true})
+            .then(object=> res.json(object))
+            .catch(err=> res.status(400).json(err))
+    },
+
+    delete: (req,res) => {
+        Product.deleteOne({_id: req.params.id})
+            .then(confirm=> res.json(confirm))
+            .catch(err=> res.json(err))
+    }
 }
-
-module.exports.updateProduct = (request, response) => {
-    Product.findOneAndUpdate({_id: request.params.id}, request.body, {new:true})
-        .then(updatedProduct => response.json(updatedProduct))
-        .catch(err => response.json(err))
-}
-
-module.exports.deleteProduct = (request, response) => {
-    Product.deleteOne({ _id: request.params.id })
-        .then(deleteConfirmation => response.json(deleteConfirmation))
-        .catch(err => response.json(err))
-}
-
